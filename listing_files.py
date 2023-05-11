@@ -15,14 +15,16 @@ import sys
 def create_csv(directory):
     # List all files in directory
     all_files = os.listdir(directory)
-
+    
+    #Sort files by name
+    all_files = sorted(all_files)
     # Prepare data for csv
     data = [["File_Name", "File_Path"]]
     for file_name in all_files:
         data.append([file_name, os.path.join(directory, file_name)])
 
     # Write data to csv
-    with open('files.csv', 'w', newline='') as file:
+    with open(directory + '/files_in_directory.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(data)
 

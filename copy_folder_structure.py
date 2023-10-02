@@ -7,20 +7,9 @@ Created on Thu Sep 28 00:47:23 2023
 """
 
 import os
+import shutil
 
 def copy_structure(src, dst):
-    """
-    This function replicates the directory structure of the source directory
-    to the destination directory without copying the files contained within
-    the directories.
-
-    Parameters:
-    src (str): The path to the source directory whose structure is to be copied.
-    dst (str): The path to the destination directory where the structure is to be replicated.
-
-    Returns:
-    None
-    """
     for dirpath, dirnames, filenames in os.walk(src):
         # Compute the destination directory path
         dst_dir = os.path.join(dst, os.path.relpath(dirpath, src))

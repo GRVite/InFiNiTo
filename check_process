@@ -1,0 +1,34 @@
+import subprocess
+import time
+import os
+
+# The command to start TeamViewer - adjust the path as necessary
+TEAMVIEWER_COMMAND = "/usr/bin/teamviewer"
+
+# The name of the TeamViewer process to look for
+PROCESS_NAME = "teamviewer"
+
+def is_teamviewer_running():
+    """Check if TeamViewer is currently running."""
+    try:
+        # List all processes and grep for the TeamViewer process
+        output = subprocess.check_output(["pgrep", "-f", PROCESS_NAME])
+        return True
+    except subprocess.CalledProcessError:
+        # pgrep will exit with a non-zero status if the process is not found
+        return False
+
+def start_teamviewer():
+    """Start TeamViewer."""
+    print("Starting TeamViewer...")
+    subprocess.Popen(TEAMVIEWER_COMMAND)
+
+while True:
+    if not is_teamviewer_running():
+        print("TeamViewer is not running. Starting it...")
+        start_teamviewer()
+    else:
+        print("TeamViewer is running.")
+    
+    # Check every 60 seconds
+    time.sleep(60)

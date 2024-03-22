@@ -1,0 +1,20 @@
+import os
+
+def delete_files_with_prefix_recursive(main_directory, prefix):
+    # Walk through all directories and subdirectories
+    for dirpath, dirnames, filenames in os.walk(main_directory):
+        # Iterate over all files in the current directory
+        for filename in filenames:
+            # Check if the file begins with the given prefix
+            if filename.startswith(prefix):
+                file_path = os.path.join(dirpath, filename)
+                try:
+                    os.remove(file_path)
+                    print(f"Deleted {file_path}")
+                except Exception as e:
+                    print(f"Error deleting {file_path}: {e}")
+
+# Example usage
+your_main_directory_path = '/path/to/your/main/directory'  # Update this to your main directory path
+your_prefix = 'specific_prefix'  # The prefix of files to delete
+delete_files_with_prefix_recursive(your_main_directory_path, your_prefix)
